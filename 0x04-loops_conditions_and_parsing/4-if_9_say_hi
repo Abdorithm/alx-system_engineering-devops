@@ -2,8 +2,12 @@
 # This script is displaying "Best School" 10 times
 
 i=0
-until [ $i -eq 10 ];
+while [ $i -le 9 ];
 do
 	echo "Best School"
+	if [ $i -eq 8 ]
+	then
+		echo "Hi"
+	fi
 	i=$(( i + 1 ))
 done
