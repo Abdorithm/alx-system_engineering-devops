@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 # display "To infinity and beyond" indefinitely.
 
-i=0
-while [ $i -le 9 ];
+while true;
 do
 	echo "To infinity and beyond"
-	i=$(( i - 1 ))
 	sleep 2
 done
