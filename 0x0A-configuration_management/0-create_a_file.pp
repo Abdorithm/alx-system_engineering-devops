@@ -2,7 +2,7 @@
 
 $content = 'I love Puppet'
 
-file {'/tmp/school':
+file { '/tmp/school':
   ensure  => file,
   content => $content,
   owner   => 'www-data',
