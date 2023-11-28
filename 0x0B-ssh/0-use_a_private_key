@@ -1,2 +1,4 @@
 #!/usr/bin/env bash
+# connecting to server with username 'ubuntu'
+
 ssh ubuntu@35.175.104.84
