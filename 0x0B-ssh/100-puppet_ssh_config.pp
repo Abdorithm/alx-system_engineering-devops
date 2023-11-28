@@ -6,7 +6,7 @@ $content = 'Host 349756-web-01
 	IdentityFile ~/.ssh/school
 	PasswordAuthentication no'
 
-file { '~/.ssh/config':
+file { '/etc/ssh/ssh_config':
   ensure  => file,
   content => $content,
 }
