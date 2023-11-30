@@ -1,8 +1,13 @@
 # Configure a server
 
-exec { 'update and install nginx':
-  command => 'apt-get update && apt-get -y install nginx',
+exec { 'update':
+  command => 'apt-get update',
   path    => '/usr/bin',
+}
+
+package { 'nginx':
+  ensure  => installed,
+  require => Exec['update'],
 }
 
 file { 'var/www/html/index.nginx-debian.html':
@@ -11,6 +16,6 @@ file { 'var/www/html/index.nginx-debian.html':
 }
 
 exec { 'redirect':
-  command => "sed -i '/server_name _;/a \\n\tlocation /redirect_me {\n\t\treturn 301 https://x.com/Abdorithm;\n\t}' /etc/nginx/sites-available/default",
+  command => 'sed -i \'/server_name _;/a \\n\tlocation /redirect_me {\n\t\treturn 301 https://x.com/Abdorithm;\n\t}\' /etc/nginx/sites-available/default',
   path    => '/usr/bin',
 }
