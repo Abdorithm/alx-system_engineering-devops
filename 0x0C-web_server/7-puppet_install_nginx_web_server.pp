@@ -10,18 +10,18 @@ package { 'nginx':
   require => Exec['update'],
 }
 
-file { 'var/www/html/index.nginx-debian.html':
+file { '/var/www/html/index.nginx-debian.html':
   ensure  => file,
   content => 'Hello World!',
 }
 
 exec { 'redirect':
-  command => 'sed -i \'/server_name _;/a \\n\tlocation /redirect_me {\n\t\treturn 301 https://x.com/Abdorithm;\n\t}\' /etc/nginx/sites-available/default',
+  command => "sed -i '/server_name _;/a \\n\tlocation /redirect_me {\n\t\treturn 301 https://x.com/Abdorithm;\n\t}' /etc/nginx/sites-available/default",
   path    => '/usr/bin',
+  require => Package['nginx'],
 }
 
 service { 'nginx':
   ensure  => running,
-  enable  => true,
   require => Package['nginx'],
 }
