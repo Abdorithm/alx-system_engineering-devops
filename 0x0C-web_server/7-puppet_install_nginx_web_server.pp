@@ -18,7 +18,6 @@ file { '/var/www/html/index.nginx-debian.html':
 exec { 'redirect':
   command => "sed -i '/server_name _;/a \\n\tlocation /redirect_me {\n\t\treturn 301 https://x.com/Abdorithm;\n\t}' /etc/nginx/sites-available/default",
   path    => '/usr/bin',
-  require => Package['nginx'],
 }
 
 service { 'nginx':
