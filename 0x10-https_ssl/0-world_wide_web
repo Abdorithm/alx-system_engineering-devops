@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+DOMAIN=$1
+get_record () {
+	TYPE=$(dig "$1.$DOMAIN" | awk '$4 == "A" {print $NF}')
+	echo "The subdomain $1 is a A record and points to $TYPE"
+}
+
+if [ "$#" -eq 1 ]; then
+	get_record "www" "$DOMAIN"
+	get_record "lb-01" "$DOMAIN"
+	get_record "web-01" "$DOMAIN"
+	get_record "web-02" "$DOMAIN"
+else
+	get_record "$2" "$DOMAIN"
+fi
