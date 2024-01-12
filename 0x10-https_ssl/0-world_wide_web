@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# get record
 
 DOMAIN=$1
 get_record () {
