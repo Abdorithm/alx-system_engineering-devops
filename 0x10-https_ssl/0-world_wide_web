@@ -2,15 +2,16 @@
 
 DOMAIN=$1
 get_record () {
-	TYPE=$(dig "$1.$DOMAIN" | awk '$4 == "A" {print $NF}')
-	echo "The subdomain $1 is a A record and points to $TYPE"
+	TYPE=$(dig "$1.$DOMAIN" | awk '$3 == "IN" {print $NF}')
+	RECORD=$(dig "$1.$DOMAIN" | awk '$3 == "IN" {print $4}')
+	echo "The subdomain $1 is a $RECORD record and points to $TYPE"
 }
 
 if [ "$#" -eq 1 ]; then
-	get_record "www" "$DOMAIN"
-	get_record "lb-01" "$DOMAIN"
-	get_record "web-01" "$DOMAIN"
-	get_record "web-02" "$DOMAIN"
+	get_record "www"
+	get_record "lb-01"
+	get_record "web-01"
+	get_record "web-02"
 else
-	get_record "$2" "$DOMAIN"
+	get_record "$2"
 fi
