@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# block all ports except 22, 443, 80.
+
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw -y enable
+sudo ufw allow http
+sudo ufw allow https
