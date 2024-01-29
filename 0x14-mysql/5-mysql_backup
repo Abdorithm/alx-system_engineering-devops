@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Generates a MySQL dump and creates a compressed archive out of it.
+
+# Check if password argument is provided
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <mysql_password>"
+    exit 1
+fi
+
+# Define MySQL dump and archive filenames
+DATE=$(date +'%d-%m-%Y')
+DUMP_FILE="backup.sql"
+ARCHIVE_FILE="$DATE.tar.gz"
+
+# Perform MySQL dump
+mysqldump -u root -p"$1" --all-databases > "$DUMP_FILE"
+
+# Create compressed archive
+tar -czvf "$ARCHIVE_FILE" "$DUMP_FILE"
+
+exit 0
