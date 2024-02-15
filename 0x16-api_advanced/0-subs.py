@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ How many subs? """
 import sys
-import json
 import requests
 
 

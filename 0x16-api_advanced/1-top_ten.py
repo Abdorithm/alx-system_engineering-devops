@@ -1,12 +1,11 @@
 #!/usr/bin/python3
 """ How many subs? """
 import sys
-import json
 import requests
 
 
 def top_ten(subreddit):
-    """return number of subs of a subreddit"""
+    """return top 10 posts of a subreddit"""
     list = []
     try:
         response = requests.get('https://www.reddit.com/r/{}/top.json?limit=10'
