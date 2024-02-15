@@ -1,0 +1,26 @@
+#!/usr/bin/python3
+""" How many subs? """
+import sys
+import json
+import requests
+
+
+def top_ten(subreddit):
+    """return number of subs of a subreddit"""
+    list = []
+    try:
+        response = requests.get('https://www.reddit.com/r/{}/top.json?limit=10'
+                                .format(subreddit),
+                                headers={'User-agent': 'Mozilla/5.0'},
+                                allow_redirects=False)
+    except requests.exceptions.RequestException:
+        return 0
+    try:
+        data = response.json().get('data').get('children')
+        for i in data:
+            title = i.get('data').get('title')
+            list.append(title)
+    except (json.decoder.JSONDecodeError, AttributeError):
+        return 0
+    for i in list:
+        print(i)
