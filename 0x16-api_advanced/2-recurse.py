@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """ How many subs? """
+import requests
 import json
 import sys
-import requests
 
 
 def recurse(subreddit, hot_list=[], after=None):

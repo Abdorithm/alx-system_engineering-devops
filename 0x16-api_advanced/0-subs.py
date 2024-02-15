@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """ How many subs? """
+import requests
 import json
 import sys
-import requests
 
 
 def number_of_subscribers(subreddit):
