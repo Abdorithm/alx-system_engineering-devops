@@ -13,7 +13,7 @@ def recurse(subreddit, hot_list=[], after=None):
                                 headers={'User-agent': 'Mozilla/5.0'},
                                 allow_redirects=False)
     except requests.exceptions.RequestException as e:
-        return None
+        return []
     try:
         data = response.json().get('data').get('children')
         after = response.json().get('data').get('after')
@@ -21,7 +21,7 @@ def recurse(subreddit, hot_list=[], after=None):
             title = i.get('data').get('title')
             hot_list.append(title)
     except (json.decoder.JSONDecodeError, AttributeError) as e:
-        return None
+        return []
     if after is not None:
         recurse(subreddit, hot_list, after)
     return hot_list
@@ -36,9 +36,9 @@ def count_words(subreddit, word_list):
         for j in x:
             for k in word_list:
                 if k.casefold() == j.casefold():
-                    if k in freq:
-                        freq[k] += 1
+                    if k.lower() in freq:
+                        freq[k.lower()] += 1
                     else:
-                        freq[k] = 1
+                        freq[k.lower()] = 1
     for key in freq.keys():
         print("{}: {}".format(key, freq[key]))
