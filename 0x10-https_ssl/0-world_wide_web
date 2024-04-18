@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# get record
+# get records and display information
 
 DOMAIN=$1
 get_record () {
